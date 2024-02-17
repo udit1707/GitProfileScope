@@ -9,6 +9,12 @@
     transform: translate(-50%);
     z-index: 0;
 
+    .repo-not-found {
+        font-size: 35px;
+        color: black;
+        font-weight: 700;
+    }
+
     .loader {
         position: absolute;
         transform: translate(-50%,-50%);

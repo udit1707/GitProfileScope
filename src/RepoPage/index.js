@@ -12,45 +12,50 @@ const RepoPage = () => {
   const { userName } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(
-    Math.ceil(location.state.repoCount / PER_PAGE)
+    Math.ceil(location?.state?.repoCount / PER_PAGE)
   );
   const [repoArr, setRepoArr] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetch(
       `https://api.github.com/users/${userName}/repos?page=${currentPage}&per_page=${PER_PAGE}`
     )
       .then((res) => {
+        if (res.status !== 200) {
+          throw new Error("not found");
+        }
         return res.json();
       })
       .then((res) => {
-        console.log(res);
         setRepoArr((prev) => res);
         setIsLoading(false);
       })
       .catch((e) => {
-        console.log(e);
         setIsLoading(false);
+        setIsError(true);
       });
   }, []);
 
   useEffect(() => {
-      fetch(
-        `https://api.github.com/users/${userName}/repos?page=${currentPage}&per_page=${PER_PAGE}`
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          console.log(res);
-          setRepoArr((prev) => res);
-          setIsLoading(false);
-        })
-        .catch((e) => {
-          console.log(e);
-          setIsLoading(false);
-        });
+    fetch(
+      `https://api.github.com/users/${userName}/repos?page=${currentPage}&per_page=${PER_PAGE}`
+    )
+      .then((res) => {
+        if (res.status !== 200) {
+          throw new Error("not found");
+        }
+        return res.json();
+      })
+      .then((res) => {
+        setRepoArr((prev) => res);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsError(true);
+        setIsLoading(false);
+      });
   }, [currentPage]);
 
   const handleNextPage = () => {
@@ -64,9 +69,13 @@ const RepoPage = () => {
   };
   return (
     <>
-      <Header label="Repositories"/>
+      <Header label="Repositories" />
       <div className={style["list-cnt"]}>
-        {isLoading ? (
+        {isError ? (
+          <div className={style["repo-not-found"]}>
+            Repositories cannot be loaded!!
+          </div>
+        ) : isLoading ? (
           <ProgressBar
             visible={true}
             height="80"
@@ -77,10 +86,11 @@ const RepoPage = () => {
             wrapperClass={style["loader"]}
           />
         ) : (
-          repoArr.map((repo) => {
+          repoArr?.map((repo) => {
             console.log(repo);
             return (
               <RepoCard
+                key={repo.id}
                 name={repo.name}
                 desc={repo.description}
                 topics={repo.topics}
@@ -90,27 +100,31 @@ const RepoPage = () => {
         )}
       </div>
       <div className={style["page-nav-cnt"]}>
-       {currentPage!==1 && <div
-          onClick={handlePrevPage}
-          role="presentation"
-          className={[
-            style["page-nav-cta"],
-            currentPage === 1 && style["page-nav-cta--disabled"],
-          ].join(" ")}
-        >
-          <MdArrowBack />
-        </div>}
+        {currentPage !== 1 && (
+          <div
+            onClick={handlePrevPage}
+            role="presentation"
+            className={[
+              style["page-nav-cta"],
+              currentPage === 1 && style["page-nav-cta--disabled"],
+            ].join(" ")}
+          >
+            <MdArrowBack />
+          </div>
+        )}
         <span className={style["current-page"]}>{currentPage}</span>
-       {currentPage < totalPage && <div
-          onClick={handleNextPage}
-          role="presentation"
-          className={[
-            style["page-nav-cta"],
-            currentPage === totalPage && style["page-nav-cta--disabled"],
-          ].join(" ")}
-        >
-          <MdArrowForward />
-        </div>}
+        {currentPage < totalPage && (
+          <div
+            onClick={handleNextPage}
+            role="presentation"
+            className={[
+              style["page-nav-cta"],
+              currentPage === totalPage && style["page-nav-cta--disabled"],
+            ].join(" ")}
+          >
+            <MdArrowForward />
+          </div>
+        )}
       </div>
     </>
   );

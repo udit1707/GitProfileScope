@@ -12,7 +12,6 @@ const RepoCard = ({ name = "ABC", topics, desc }) => {
           })}
         </div>
       )}
-      {/* {desc && <div className={style["desc"]}>{desc}</div>} */}
     </div>
   );
 };

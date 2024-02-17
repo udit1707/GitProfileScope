@@ -3,4 +3,10 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+
+    .profile-not-found {
+        font-size: 35px;
+        color: black;
+        font-weight: 700;
+    }
 }
