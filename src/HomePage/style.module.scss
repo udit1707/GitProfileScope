@@ -1,0 +1,56 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.237);
+  color: white;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  .main-header {
+    font-weight: 800;
+    font-size: 80px;
+    color: white;
+    margin: 20px 0;
+  }
+
+  .search-cnt {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+  }
+
+  .search-inp {
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: 600;
+
+    &::placeholder {
+      color: black;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search-btn {
+    cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 15px;
+    padding: 10px;
+  }
+}

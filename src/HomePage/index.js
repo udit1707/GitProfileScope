@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./style.scss";
+import styles from "./style.module.scss";
 import { redirect, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -13,14 +13,20 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter github username"
-        value={val}
-        onChange={(e) => setVal(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className={styles["homepage"]}>
+      <div className={styles["main-header"]}>GITHUB PROFILE LENS</div>
+      <div className={styles["search-cnt"]}>
+        <input
+          type="text"
+          placeholder="Enter github username"
+          value={val}
+          onChange={(e) => setVal(e.target.value)}
+          className={styles["search-inp"]}
+        />
+        <button onClick={handleSearch} className={styles["search-btn"]}>
+          Search
+        </button>
+      </div>
     </div>
   );
 };
