@@ -17,7 +17,6 @@ const ProfilePage = () => {
         return res.json();
       })
       .then((res) => {
-        console.log(res);
         setProfileUser(res);
         setIsLoading(false);
       })
