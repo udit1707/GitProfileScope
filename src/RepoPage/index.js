@@ -31,11 +31,11 @@ const RepoPage = () => {
       })
       .catch((e) => {
         console.log(e);
+        setIsLoading(false);
       });
   }, []);
 
   useEffect(() => {
-    if (currentPage < totalPage) {
       fetch(
         `https://api.github.com/users/${userName}/repos?page=${currentPage}&per_page=${PER_PAGE}`
       )
@@ -49,8 +49,8 @@ const RepoPage = () => {
         })
         .catch((e) => {
           console.log(e);
+          setIsLoading(false);
         });
-    }
   }, [currentPage]);
 
   const handleNextPage = () => {
@@ -64,7 +64,7 @@ const RepoPage = () => {
   };
   return (
     <>
-      <Header />
+      <Header label="Repositories"/>
       <div className={style["list-cnt"]}>
         {isLoading ? (
           <ProgressBar
@@ -90,7 +90,7 @@ const RepoPage = () => {
         )}
       </div>
       <div className={style["page-nav-cnt"]}>
-        <div
+       {currentPage!==1 && <div
           onClick={handlePrevPage}
           role="presentation"
           className={[
@@ -99,9 +99,9 @@ const RepoPage = () => {
           ].join(" ")}
         >
           <MdArrowBack />
-        </div>
+        </div>}
         <span className={style["current-page"]}>{currentPage}</span>
-        <div
+       {currentPage < totalPage && <div
           onClick={handleNextPage}
           role="presentation"
           className={[
@@ -110,7 +110,7 @@ const RepoPage = () => {
           ].join(" ")}
         >
           <MdArrowForward />
-        </div>
+        </div>}
       </div>
     </>
   );

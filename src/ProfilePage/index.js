@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Header />
+      <Header label="Profile"/>
       <div className={style["profile-page"]}>
 
       {!isLoading && profileUser ? (
