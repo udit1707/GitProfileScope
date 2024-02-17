@@ -1,0 +1,40 @@
+.list-cnt {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 5px 30px;
+    min-width: 350px;
+    position: relative;
+    left: 50%;
+    margin-top: 10%;
+    transform: translate(-50%);
+
+    .loader {
+        position: absolute;
+        transform: translate(-50%,-50%);
+        left: 50%;
+        top: 50%;
+    }
+}
+
+.page-nav-cnt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+
+
+    .current-page {
+        font-size: 15px;
+        font-family: 700;
+        color: black;
+        margin: 0 20px;
+    }
+
+    .page-nav-cta {
+        cursor: pointer;
+
+        &--disabled{
+            pointer-events: none;
+        }
+    }
+}

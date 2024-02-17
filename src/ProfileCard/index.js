@@ -24,7 +24,7 @@ const ProfileCard = ({
       <div className={style["repo-cnt"]}>
         <span>Tota Public Repositories: {repoCount}</span>
       </div>
-      <Link to={`/${username}/repos`} className={style["view-repos-cta"]}>
+      <Link to={`/${username}/repos`} className={style["view-repos-cta"]} state={{repoCount}}>
           View Repos
         </Link>
     </div>
