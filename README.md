@@ -1,3 +1,14 @@
+# Description
+
+- GitProfileScope lets a user search for any existing GitHub user via the username.
+- Users can then check out the git user's profile card.
+- Users can also append the respected username to baseurl and then will be redirected to the profile card if the user exists.
+- The View Repo feature lets the user fetch the public repo list of GitHub users.
+- 
+# Steps to configure
+- npm i --save
+- npm start
+
 # Screen
 
 <img width="1275" alt="Screenshot 2024-02-17 221606" src="https://github.com/udit1707/GitProfileScope/assets/43987867/eaf7557e-585b-4af8-afdc-1e13a1e522c0">
