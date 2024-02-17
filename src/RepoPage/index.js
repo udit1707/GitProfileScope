@@ -87,7 +87,6 @@ const RepoPage = () => {
           />
         ) : (
           repoArr?.map((repo) => {
-            console.log(repo);
             return (
               <RepoCard
                 key={repo.id}
