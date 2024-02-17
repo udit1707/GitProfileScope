@@ -4,7 +4,8 @@
 - Users can then check out the git user's profile card.
 - Users can also append the respected username to baseurl and then will be redirected to the profile card if the user exists.
 - The View Repo feature lets the user fetch the public repo list of GitHub users.
-- 
+
+
 # Steps to configure
 - npm i --save
 - npm start
